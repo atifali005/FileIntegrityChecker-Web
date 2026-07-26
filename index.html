@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Integrity Checker</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🔒 File Integrity Checker</h1>
+
+        <p>SHA-256 Based File Integrity Verification</p>
+
+        <hr>
+
+        <!-- Generate Hash -->
+        <h2>Generate SHA-256 Hash</h2>
+
+        <form action="/generate" method="POST" enctype="multipart/form-data">
+
+            <input type="file" name="file" required>
+
+            <br><br>
+
+            <button type="submit">
+                Generate Hash
+            </button>
+
+        </form>
+
+        <br>
+
+        <!-- Verify Hash -->
+        <h2>Verify File Integrity</h2>
+
+        <form action="/verify" method="POST" enctype="multipart/form-data">
+
+            <input type="file" name="file" required>
+
+            <br><br>
+
+            <button type="submit">
+                Verify File
+            </button>
+
+        </form>
+
+        <br>
+
+        <!-- Result Section -->
+        {% if result %}
+
+            <hr>
+
+            {% if result["success"] %}
+
+                <h2 style="color:green;">
+                    {{ result["message"] }}
+                </h2>
+
+                {% if result.get("hash") %}
+
+                    <h3>SHA-256 Hash</h3>
+
+                    <textarea rows="5" cols="80" readonly>{{ result["hash"] }}</textarea>
+
+                {% endif %}
+
+                {% if result.get("saved") %}
+
+                    <p>
+                        <strong>Hash File:</strong>
+                        {{ result["saved"] }}
+                    </p>
+
+                {% endif %}
+
+                {% if result.get("current_hash") %}
+
+                    <h3>Current Hash</h3>
+
+                    <textarea rows="5" cols="80" readonly>{{ result["current_hash"] }}</textarea>
+
+                    <br><br>
+
+                    <h3>Stored Hash</h3>
+
+                    <textarea rows="5" cols="80" readonly>{{ result["stored_hash"] }}</textarea>
+
+                {% endif %}
+
+            {% else %}
+
+                <h2 style="color:red;">
+                    {{ result["message"] }}
+                </h2>
+
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>

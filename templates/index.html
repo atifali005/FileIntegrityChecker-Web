@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>File Integrity Checker</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>🔐 File Integrity Checker</h1>
+
+    <p>
+        SHA-256 Based File Integrity Verification System
+    </p>
+
+
+    <hr>
+
+
+    <h2>Generate SHA-256 Hash</h2>
+
+
+    <form action="/generate"
+          method="POST"
+          enctype="multipart/form-data">
+
+
+        <input type="file"
+               name="file"
+               required>
+
+
+        <br><br>
+
+
+        <button type="submit">
+            Generate Hash
+        </button>
+
+
+    </form>
+
+
+
+    <br><br>
+
+
+
+    <h2>Verify File Integrity</h2>
+
+
+    <form action="/verify"
+          method="POST"
+          enctype="multipart/form-data">
+
+
+        <input type="file"
+               name="file"
+               required>
+
+
+        <br><br>
+
+
+        <button type="submit">
+            Verify File
+        </button>
+
+
+    </form>
+
+
+
+
+    {% if result %}
+
+
+    <hr>
+
+
+        {% if result.success %}
+
+
+            <h2 class="success">
+                {{ result.message }}
+            </h2>
+
+
+            {% if result.hash %}
+
+            <h3>SHA-256 Hash</h3>
+
+            <textarea readonly>{{ result.hash }}</textarea>
+
+
+            {% endif %}
+
+
+
+            {% if result.current_hash %}
+
+            <h3>Current Hash</h3>
+
+            <textarea readonly>{{ result.current_hash }}</textarea>
+
+
+            <h3>Stored Hash</h3>
+
+            <textarea readonly>{{ result.stored_hash }}</textarea>
+
+
+            {% endif %}
+
+
+
+            {% if result.saved %}
+
+            <p>
+                Hash saved at:
+                <b>{{ result.saved }}</b>
+            </p>
+
+            {% endif %}
+
+
+
+        {% else %}
+
+
+            <h2 class="error">
+                {{ result.message }}
+            </h2>
+
+
+        {% endif %}
+
+
+
+    {% endif %}
+
+
+
+</div>
+
+
+</body>
+
+</html>
