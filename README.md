@@ -138,7 +138,7 @@ http://127.0.0.1:5000
 
 ### Verification Successful
 
-![Verify Success](screenshots/integity.png)
+![Verify Success](screenshots/integrity.png)
 
 ---
 
