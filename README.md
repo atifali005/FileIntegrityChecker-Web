@@ -126,7 +126,7 @@ http://127.0.0.1:5000
 
 * `interface.png`
 * `hash.png`
-* `integriy.png`
+* `integrity.png`
 
 ### Home Page
 
@@ -177,7 +177,7 @@ http://127.0.0.1:5000
 
 ## 👨‍💻 Author
 
-**Syed Atif**
+**Syed Atif Ali**
 
 Bachelor of Engineering (Information Technology)
 
